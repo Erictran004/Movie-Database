@@ -1,0 +1,125 @@
+doctype html
+head
+  link(rel='stylesheet' type='text/css' href='/CSS/navstyle.css')
+  link(rel='stylesheet' type='text/css' href='/CSS/bodystyle.css')
+  link(rel='stylesheet' type='text/css' href='/CSS/help-tool.css')
+  script(type='text/javascript' src='/client.js')
+  style.
+    .movieSquare{
+    vertical-align: top;
+    background: rgb(79, 115, 156);
+    height: 100vh;
+    width: 100vw;
+    border: 0;
+    border-radius: 2vw;
+    padding: 2vh 1vw;
+    box-sizing: border-box;
+    z-index: 1;
+    color: aliceblue;
+    }
+    .movieposter{
+    vertical-align: auto;
+    width: 10vw;
+    height: 30vh;
+    }
+    .movieSquare label {
+    position: relative;
+    vertical-align: auto;
+    }
+    .MovieInfo{
+    text-align: left;
+    }
+    hr.dashed {
+    border-top: 3px dashed #bbb;
+    }
+    input[type="text"]{
+        width: 95%;
+    }
+    .info{
+        width: 30vw;
+        height: 30vh;
+        background-color: white;
+        color: black;
+        overflow: auto;
+    }
+    button{
+        font-size: 30px;
+        color: white;
+        left: 50%
+    }
+    #confirm{
+        background-color: green;
+    }
+    #cancel{
+        background-color: red;
+    }
+table.CSSTable(cellpadding='50')
+  tr
+    td.movieSquare
+      .MovieInfo
+        label(for='title') Title:
+        br
+        input#Title(type='text' name='title')
+        hr.solid
+        .tooltip
+            | Poster:
+            span.tooltiptext Enter a URL for an image to change the poster
+        input#Poster(type='text' name='poster')
+        hr.solid
+        label(for='plot') Plot:
+        br
+        input#Plot(type='text' name='plot')
+        hr.solid
+        label(for='release') Released:
+        input#Released(type='text' name='release')
+        hr.solid
+        label(for='runtime') Runtime: 
+        input#Runtime(type='text' name='runtime')
+        hr.solid
+        .tooltip
+            | Genres:
+            span.tooltiptext Type in the correct genre name with the first letter capitalized. Separate the genres with a comma
+        br
+        input#Genre(type='text' name='release')
+        p Genre List:
+        p Drama, Comedy, Thriller, Romance, Action, Horror, Crime, Adventure, Mystery, Family, Sci-Fi, Fantasy, Music, Animation, Biography, History, Musical, War, Sport, Western
+        hr.solid
+        .tooltip
+            | Director:
+            span.tooltiptext Type in the correct director name with the proper capitalizations. Separate the directors with a comma. The list of directors can be found below
+        input#Director(type='text' name='Director')
+        br
+        br
+        .info 
+            each director in DirectorObjects 
+                p #{director.name}
+        hr.solid
+        .tooltip
+            | Writer:
+            span.tooltiptext Type in the correct writer name with the proper capitalizations. Separate the writers with a comma. The list of writers can be found below
+        input#Writers(type='text')
+        br
+        br
+        .info 
+            each writer in WriterObjects 
+                p #{writer.name}
+        hr.solid
+        .tooltip
+            | Actor:
+            span.tooltiptext Type in the correct actor name with the proper capitalizations. Separate the actors with a comma. The list of actors can be found below
+        input#Actors(type='text')
+        br
+        br
+        .info 
+            each actor in ActorObjects 
+                p #{actor.name}
+  
+        hr.solid
+        p Awards:
+        input#Awards(type='text' name='runtime')
+        br
+        br
+        a(href="/movies")
+            button#confirm(name="confirm" onclick="addMovie()") &#10003;
+        a(href="/movies")
+            button#cancel(name="cancel") &#10008; 

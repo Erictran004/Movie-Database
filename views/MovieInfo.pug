@@ -1,0 +1,282 @@
+doctype html
+head
+  link(rel='stylesheet' type='text/css' href='/CSS/navstyle.css')
+  link(rel='stylesheet' type='text/css' href='/CSS/bodystyle.css')
+  link(rel='stylesheet' type='text/css' href='homepagesearchbar.css')
+  script(type='text/javascript' src='/client.js')
+  style.
+    .movieSquare{
+    vertical-align: top;
+    background: rgb(79, 115, 156);
+    height: 100vh;
+    width: 100vw;
+    border: 0;
+    border-radius: 2vw;
+    padding: 2vh 1vw;
+    box-sizing: border-box;
+    z-index: 1;
+    color: aliceblue;
+    }
+    .movieposter{
+    vertical-align: auto;
+    width: 10vw;
+    height: 30vh;
+    }
+    .movieSquare label {
+    position: relative;
+    vertical-align: auto;
+    }
+    .MovieInfo{
+    text-align: left;
+    }
+    #Writereview{
+    position: relative;
+    vertical-align: auto;
+    background-color:rgb(59, 91, 150);
+    border-radius: 2vw;
+    color: rgb(207, 223, 252);
+    padding: 4px 8px;
+    }
+    #Writereview:hover{
+    background-color:rgb(81, 125, 206);
+    }
+    .reviewLog{
+    height: 50vh;
+    width: 40vw;
+    border-radius: 2vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(201, 226, 248);
+    padding-top: 1vh;
+    z-index: 2;
+    }
+    .reviewLog h1{
+    color: black;
+    }
+    .Review{
+    position: relative;
+    overflow-y: scroll;
+    height: 35vh;
+    width: 35vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: whitesmoke;
+    padding-top: 2vh;
+    padding-left: 2vw;
+    padding-right: 2w;
+    text-align: left;
+    color: black;
+    }
+    .form-popup{
+    height: 50vh;
+    width: 40vw;
+    border-radius: 2vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(201, 226, 248);
+    padding-top: 1vh;
+    z-index: 2;
+    }
+    .form-popup h1{
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    }
+    #yourReview{
+    position: relative;
+    height: 169px;
+    width: 519px;
+    background-color: whitesmoke;
+    padding-top: 2vh;
+    padding-left: 2vw;
+    padding-right: 2w;
+    text-align: left;
+    color: black;
+    }
+    #reviewForm{
+    height: 25vh;
+    width: 30vw;
+    background-color: rgb(201, 226, 248);
+    padding-top: 2vh;
+    padding-left: 2vw;
+    padding-right: 2w;
+    }
+    #submitReview{
+    position: relative;
+    vertical-align: auto;
+    background-color: rgb(69, 141, 84);
+    color: whitesmoke;
+    padding: 4px 8px;
+    }
+    #submitReview:hover{
+    background-color: rgb(106, 209, 128);
+    }
+    #cancelReview{
+    position: relative;
+    vertical-align: auto;
+    background-color: rgb(220, 0, 0);
+    color: whitesmoke;
+    padding: 4px 8px;
+    }
+    #cancelReview:hover{
+    background-color:rgb(243, 3, 3);
+    }
+    .rating {
+    position: relative;
+    vertical-align: auto;
+    font-size: 30px;
+    overflow:hidden;
+    }
+    .rating input {
+    float: right;
+    opacity: 0;
+    position: absolute;
+    }
+    .rating a, .rating label {
+    vertical-align: auto;
+    color: #aaa;
+    text-decoration: none;
+    -webkit-transition: color .4s;
+    -moz-transition: color .4s;
+    -o-transition: color .4s;
+    transition: color .4s;
+    }
+    .rating label:hover ~ label,
+    .rating input:focus ~ label,
+    .rating label:hover,
+    .rating a:hover,
+    .rating a:hover ~ a,
+    .rating a:focus,
+    .rating a:focus ~ a		{
+    color: orange;
+    cursor: pointer;
+    }
+    .rating2 {
+    direction: rtl;
+    }
+    .rating2 a {
+    float:none
+    }
+    .textarea{
+      rows: 5
+      column: 30
+    }
+    hr.dashed {
+    border-top: 3px dashed #bbb;
+    }
+    .MovieRating{
+    text-align: left;
+    color: aliceblue;
+    }
+    .dropbtnstyle{
+    position:relative;
+    margin-left: auto;
+    }
+    a{
+      color: whitesmoke;
+      text-decoration: none;
+    }
+    a:hover{
+      text-decoration: underline;
+    }
+.topnavigation
+    a.nav(href='/homepage') Home
+    a.nav(href=curUser.URL) My Account
+    a.nav(href='/genres') Genres
+    a.nav.selected(href='/movies') Movies
+    a.nav(href='/users') Users
+    a.nav(href='/actors') Actors
+    a.nav(href='/directors') Directors
+    a.nav(href='/writers') Writers
+    a.notification(href='/notifications')
+      span 	&#128276;
+      span.badge 20
+table.CSSTable(cellpadding='50')
+  br
+  br
+  br
+  tr
+    td.movieSquare
+      h1#Title #{MovieInfo.Title}
+      img#poster.movieposter(src=MovieInfo.Poster)
+      //Gives a contributing user the option to edit a movie's information
+      if curUser.contributingUser
+        br
+        a(href= MovieInfo.URL+"/edit")
+          button Edit &#128393;
+      br
+      p #{MovieInfo.Plot}
+      hr.solid
+      .MovieInfo
+        -var AverageRating = 0;
+        //If no reviews are present
+        if(MovieInfo.reviews.length==0)
+          p Rating: N/A 
+        else
+          //Loops through each reviewer's rating to get a average score for the movie
+          each review in MovieInfo.reviews
+            -AverageRating += review.starrating
+          //Check if the rating is a decimal. If it is round to 1 decimal place
+          if AverageRating/MovieInfo.reviews.length % 1 == 0
+            p Rating: #{AverageRating/MovieInfo.reviews.length}/10
+          else
+            p Rating: #{(AverageRating/MovieInfo.reviews.length).toFixed(1)}/10
+        p Release Date: #{MovieInfo.Released}
+        p Runtime: #{MovieInfo.Runtime}
+        p Genres: #{MovieInfo.Genre}
+        hr.solid
+        p Director:
+        each val in DirectorInfo
+          a(href=val.URL) #{val.name} 
+        hr.solid
+        p Writer:
+        each val in WriterInfo
+          a(href=val.URL) #{val.name}, 
+        p Actors:
+        each val in ActorInfo
+          a#hyper(href=val.URL) #{val.name}, 
+        hr.solid
+        p Awards: #{MovieInfo.Awards}
+    td.trendingRightSquare
+      #publicreviews.reviewLog
+        h1(style='font-size: medium;') Reviews:
+        //Prints the reviews by traversing through the movie's reviews array
+        .Review
+          -for (var i = 0; i < MovieInfo.reviews.length; i++){
+            p
+            a(href=ReviewerURL[i],style='color:black') #{MovieInfo.reviews[i].owner}
+            |  (#{MovieInfo.reviews[i].starrating}/10): #{MovieInfo.reviews[i].date}
+            p #{MovieInfo.reviews[i].longreview}
+            hr
+          -}
+
+      br
+      br
+      br
+      #myreview.form-popup
+        h1(style='font-size: medium;') Your Review:
+        #starbutton.rating
+          input#e10(name='stars' type='radio')
+          label(for='e10') &#x2605;
+          input#e9(name='stars' type='radio')
+          label(for='e9') &#x2605;
+          input#e8(name='stars' type='radio')
+          label(for='e8') &#x2605;
+          input#e7(name='stars' type='radio')
+          label(for='e7') &#x2605;
+          input#e6(name='stars' type='radio')
+          label(for='e6') &#x2605;
+          input#e5(name='stars' type='radio')
+          label(for='e5') &#x2605;
+          input#e4(name='stars' type='radio')
+          label(for='e4') &#x2605;
+          input#e3(name='stars' type='radio')
+          label(for='e3') &#x2605;
+          input#e2(name='stars' type='radio')
+          label(for='e2') &#x2605;
+          input#e1(name='stars' type='radio')
+          label(for='e1') &#x2605;
+        textarea#longReview(name='movreview')
+        br
+        button#submitReview(onclick='submit()') submit &#9745;
+        button#cancelReview(onclick='cancelReview()') cancel &#9746;

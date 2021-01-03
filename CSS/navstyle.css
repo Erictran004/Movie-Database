@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap);
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(45,58,68);
+}
+/*
+Bar Properties:
+
+-The overflow is clipped, and the rest of the content will be invisible
+-Set the navbar to fixed position
+-Position the navbar at the top of the page
+-Full width
+*/
+.topnavigation {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgb(93,92,97);
+    z-index: 1;
+}
+/*Link Style*/
+.nav{
+    float: left;
+    color: rgb(226, 238, 245);
+    text-align: center;
+    padding: 16.5px 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+.notification {
+    background-color: #555;
+    color: white;
+    float: right;
+    color: rgb(226, 238, 245);
+    text-align: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+.notification:hover {
+    background: rgb(172, 169, 182);
+}
+  
+.notification .badge {
+    position: absolute;
+    font-size: 6px;
+    top: 10px;
+    right: 16px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
+/* Change the color on hovered over links */
+.topnavigation a:hover {
+    background-color: rgb(172, 169, 182);
+    color: rgb(226, 238, 245);
+}
+/* Add a color to the current link */
+.topnavigation a.selected {
+    background-color:  rgb(114, 154, 190);
+    color: rgb(226, 238, 245);
+}

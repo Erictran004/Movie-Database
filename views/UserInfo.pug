@@ -1,0 +1,115 @@
+doctype html
+head
+  link(rel='stylesheet' type='text/css' href='/CSS/navstyle.css')
+  link(rel='stylesheet' type='text/css' href='/CSS/bodystyle.css')
+  link(rel='stylesheet' type='text/css' href='/CSS/homepagesearchbar.css')
+  script(type='text/javascript' src='/client.js')
+  style.
+    .userProfileSquare{
+    vertical-align: top;
+    background: rgb(79, 115, 156);
+    height: 100vh;
+    width: 100vw;
+    border: 0;
+    border-radius: 2vw;
+    padding: 5vh 1vw;
+    box-sizing: border-box;
+    z-index: 1;
+    }
+    .userInfo{
+    position: relative;
+    }
+    .userActivity{
+    color: aliceblue;
+    text-align: left;
+    }
+    .followbtn{
+    position: relative;
+    text-align: right;
+    }
+    .movieposter{
+    position: relative;
+    vertical-align: left;
+    width: 10vw;
+    height: 30vh;
+    }
+    hr.dashed {
+    border-top: 3px dashed #bbb;
+    }
+    .divider{
+    width: 2vw;
+    height:auto;
+    display:inline-block;
+    }
+    div.Added {
+    position: relative;
+    background-color: rgb(79, 115, 156);
+    width: 95vw;
+    overflow: auto;
+    white-space: nowrap;
+    }
+.topnavigation
+  if curUser.URL === UserInfo.URL
+    a.nav(href='/homepage') Home
+    a.nav.selected(href=curUser.URL) My Account
+    a.nav(href='/genres') Genres
+    a.nav(href='/movies') Movies
+    a.nav(href='/users') Users
+    a.nav(href='/actors') Actors
+    a.nav(href='/directors') Directors
+    a.nav(href='/writers') Writers
+  if !(curUser.URL === UserInfo.URL)
+    a.nav(href='/homepage') Home
+    a.nav(href=curUser.URL) My Account
+    a.nav(href='/genres') Genres
+    a.nav(href='/movies') Movies
+    a.nav.selected(href='/users') Users
+    a.nav(href='/actors') Actors
+    a.nav(href='/directors') Directors
+    a.nav(href='/writers') Writers
+  a.notification(href='/notifications')
+    span 	&#128276;
+table.CSSTable(cellpadding='50')
+  br
+  br
+  br
+  tr
+    td.userProfileSquare
+      .userInfo(style='color: white;')
+        img#avatarpic.profile(src=UserInfo.profilePicture)
+        br
+        label#username #{UserInfo.username}
+        if UserInfo.isonline
+          label (online)
+
+        else
+          label (offline)
+        br
+        label#a #{UserInfo.followers.length} 
+        button.dropbtn Followers
+        .divider
+        label#b #{UserInfo.following.length} 
+        button.dropbtn Following
+        br
+      if !(curUser.URL === UserInfo.URL)
+        .followbtn
+          button( onclick='follow()')#follow.dropbtn Follow
+          br
+        .followbtn
+          button( onclick = 'unfollow()')#unfollow.dropbtn Unfollow
+      hr.solid
+      .userActivity 
+        label Reviewed Movies:
+        br
+        .Added
+          each val in UserReviews
+            a#displayReviewedMovies(href=val.URL)
+              img#poster.movieposter(src=val.Poster)
+        br
+        hr.solid
+        label#contributinguser Added Movies:
+        br
+        .Added
+          each val in UserAddedMovies
+            a#displayReviewedMovies(href=val.URL)
+              img#poster.movieposter(src=val.Poster)

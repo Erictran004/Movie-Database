@@ -1,0 +1,187 @@
+doctype html
+head
+  link(rel='stylesheet' type='text/css' href='navstyle.css')
+  link(rel='stylesheet' type='text/css' href='bodystyle.css')
+  link(rel='stylesheet' type='text/css' href='homepagesearchbar.css')
+  script(type='text/javascript' src='client.js')
+  style.
+    .genreSquare{
+    text-align: left;
+    color: aliceblue;
+    font-size: large;
+    vertical-align: top;
+    background: rgb(79, 115, 156);
+    height: 100vh;
+    width: 90vw;
+    border: 0;
+    border-radius: 2vw;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 5vh 3vw;
+    box-sizing: border-box;
+    z-index: 1;
+    }
+    .genretable{
+    background-color: rgb(105, 190, 209);
+    color: black;
+    padding: 0 100px;
+    text-align: left;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 90%;
+    }
+    .GenreBTN{
+    background-color: rgb(103, 122, 158);
+    border-radius: 2vw;
+    color: white;
+    width: 7vw;
+    padding: 16px;
+    font-size: 16px;
+    outline: none;
+    border-color: black;
+    }
+    .GenreBTN:hover{background-color: rgb(141, 170, 223);}
+    div.Added {
+      position: relative;
+      background-color: rgb(79, 115, 156);
+      width: 75vw;
+      overflow: auto;
+      white-space: nowrap;
+    }
+.topnavigation
+    a.nav(href='/homepage') Home
+    a.nav(href=curUser.URL) My Account
+    a.nav.selected(href='/genres') Genres
+    a.nav(href='/movies') Movies
+    a.nav(href='/users') Users
+    a.nav(href='/actors') Actors
+    a.nav(href='/directors') Directors
+    a.nav(href='/writers') Writers
+    a.notification(href='/notifications')
+      span 	&#128276;
+table.CSSTable(cellpadding='50')
+  br
+  br
+  br
+  tr
+    td.profileSquare
+      .Profilepicture
+        a(href=curUser.URL)
+          img#profilepic.profile(src=curUser.profilePicture)
+      .Usermame(style='color: white;')
+        label #{curUser.username}
+        form(action='/logout' method='post')
+          button.dropbtn(type='logout') Logout
+      .profileInfo
+      br
+      input#username(type='text' name='username' required='')
+      br
+      button(type='searchuser' onclick='searchUser()') search user...
+      br
+      br
+      input#profile(type='text' name='profile' required='')
+      br
+      button(type='searchuser' onclick='changeProfile()') enter link to change profile picture
+      br
+      br
+      .dropdown
+        label#followercount #{curUser.followers.length}
+        br 
+        button.dropbtn Followers
+        .dropdown-content
+         ul#follower(type='followers')
+      br
+      br
+      .dropdown
+        label#followingcount  #{curUser.following.length} 
+        br
+        button.dropbtn Following
+        .dropdown-content
+          ul#following(type='following')
+      br
+      br
+      button(type='button') Settings
+      br
+      br
+      if curUser.contributingUser == true
+        input#contribute(type='checkbox' name='contribute' onclick="updateContributingUser()" checked='checked')
+        label(for='contribute')  Contributing User
+      else
+        input#contribute(type='checkbox' name='contribute' onclick="updateContributingUser()")
+        label(for='contribute')  Contributing User
+    td.genreSquare
+      div(style='overflow-x:auto')
+        table.genretable
+          label Genres:
+          br
+          tr
+            td
+              input#B1.hovertable(type='checkbox' value='Drama')
+              | Drama
+            td
+              input#B2.hovertable(type='checkbox' value='Comedy')
+              | Comedy
+            td
+              input#B3.hovertable(type='checkbox' value='Thriller')
+              | Thriller
+            td
+              input#B4.hovertable(type='checkbox' value='Romance')
+              | Romance
+          tr
+            td
+              input#B5.hovertable(type='checkbox' value='Action')
+              | Action
+            td
+              input#B6.hovertable(type='checkbox' value='Horror')
+              | Horror
+            td
+              input#B7.hovertable(type='checkbox' value='Crime')
+              | Crime
+            td
+              input#B8.hovertable(type='checkbox' value='Adventure')
+              | Adventure
+          tr
+            td
+              input#B9.hovertable(type='checkbox' value='Mystery')
+              | Mystery
+            td
+              input#B10.hovertable(type='checkbox' value='Family')
+              | Family
+            td
+              input#B11.hovertable(type='checkbox' value='Sci-Fi')
+              | Sci-Fi
+            td
+              input#B12.hovertable(type='checkbox' value='Fantasy')
+              | Fantasy
+          tr
+            td
+              input#B13.hovertable(type='checkbox' value='Music')
+              | Music
+            td
+              input#B14.hovertable(type='checkbox' value='Animation')
+              | Animation
+            td
+              input#B15.hovertable(type='checkbox' value='Biography')
+              | Biography
+            td
+              input#B16.hovertable(type='checkbox' value='History')
+              | History
+          tr
+            td
+              input#B17.hovertable(type='checkbox' value='Musical')
+              | Musical
+            td
+              input#B18.hovertable(type='checkbox' value='War')
+              | War
+            td
+              input#B19.hovertable(type='checkbox' value='Sport')
+              | Sport
+            td
+              input#B20.hovertable(type='checkbox' value='Western')
+              | Western
+      br
+      .GenreButtons
+        button.GenreBTN(onclick='clearFilters()') Clear All
+        button.GenreBTN(onclick='getGenresToFilter()') Filter
+      label#GenresSearched
+      .Added#Added
+

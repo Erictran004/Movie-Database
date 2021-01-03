@@ -1,0 +1,68 @@
+<style>
+    @import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
+    body{
+        background-image: url('Images/LoginBackground.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgb(45,58,68);
+        flex: 1 1 300px;
+    }
+    .login{
+        position: fixed;
+        width: 25vw;
+        height: 60vh;
+        left: 35%;
+        top: 15%;
+        border: 1;
+        border-radius: 4vw;
+        padding: 5vh 3vw;
+        background-color: rgb(74, 95, 110);
+        color: rgb(226, 238, 245);
+        flex: 1 1 300px;
+    }
+    .logo {
+        position: relative;
+        left: 21.25%;
+                
+        background-color: rgb(74, 95, 110);
+        width: 15vw;
+        height: 24vh;
+        border-radius: 50%;
+    }        
+    input[id=password],input[id=username]{
+        position: relative;
+        width: 100%;
+        padding: 12px 24px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid rgb(74, 95, 110);
+        box-sizing: border-box;
+    }
+    button{
+        position: relative;
+        border-radius: 3vw;
+        left: 27.0625%;
+        width: 50%;
+        padding: 12px 24px;
+    }
+    button[type=login]{
+        top: 5%;
+        background-color: rgb(69, 141, 84);
+    }
+    button[type=login]:hover{
+        background-color: rgb(106, 209, 128);
+    }
+</style>
+<body>
+    <div class="login">
+        <img src="Images/logo.png" alt="Logo" class="logo">
+        <form action="/login" method="post" id="login">
+            Username: <input id = "username"type="text" name="username" required><br>
+            Password: <input id = "password"type="password" name="password" required><br>
+            <button type="login">Login</button>
+        </form>
+        <a href="Signup.html">Need an account?</a>
+    </div>
+</body>

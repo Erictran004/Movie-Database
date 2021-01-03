@@ -1,0 +1,73 @@
+doctype html
+head
+  link(rel='stylesheet' type='text/css' href='/CSS/navstyle.css')
+  link(rel='stylesheet' type='text/css' href='/CSS/bodystyle.css')
+  link(rel='stylesheet' type='text/css' href='/CSS/help-tool.css')
+  script(type='text/javascript' src='/client.js')
+  style.
+    .movieSquare{
+    vertical-align: top;
+    background: rgb(79, 115, 156);
+    height: 100vh;
+    width: 100vw;
+    border: 0;
+    border-radius: 2vw;
+    padding: 2vh 1vw;
+    box-sizing: border-box;
+    z-index: 1;
+    color: aliceblue;
+    }
+    .movieposter{
+    vertical-align: auto;
+    width: 10vw;
+    height: 30vh;
+    }
+    .movieSquare label {
+    position: relative;
+    vertical-align: auto;
+    }
+    .MovieInfo{
+    text-align: left;
+    }
+    hr.dashed {
+    border-top: 3px dashed #bbb;
+    }
+    input[type="text"]{
+        width: 95%;
+    }
+    .info{
+        width: 30vw;
+        height: 30vh;
+        background-color: white;
+        color: black;
+        overflow: auto;
+    }
+    button{
+        font-size: 30px;
+        color: white;
+        left: 50%
+    }
+    #confirm{
+        background-color: green;
+    }
+    #cancel{
+        background-color: red;
+    }
+table.CSSTable(cellpadding='50')
+  tr
+    td.movieSquare
+      .MovieInfo
+        label(for='name') Name:
+        br
+        input#name(type='text' name='title')
+        hr.solid
+        .tooltip
+            | Type:
+            span.tooltiptext Enter either "Actor", "Writer", or "Director"
+        br
+        input#Type(type='text' name='poster')
+        hr.solid
+        //a(href="/homepage")
+        button#confirm(name="confirm" onclick="addPerson()") &#10003;
+        a(href="/homepage")
+            button#cancel(name="cancel") &#10008; 
